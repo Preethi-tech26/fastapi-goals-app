@@ -37,15 +37,24 @@ uvicorn main:app --reload
 
 Visit `http://127.0.0.1:8000/docs` to explore the API.
 
+### Example request body for POST /goals
+\`\`\`json
+{
+  "title": "Learn FastAPI"
+}
+\`\`\`
+
 ## API Endpoints
 
 | Method | Endpoint           | Description            |
 | ------ | ------------------ | ---------------------- |
 | GET    | `/`                | Health check           |
-| POST   | `/goals/{title}`   | Create a new goal      |
+| POST   | `/goals`          | Create a new goal      |
 | GET    | `/goals`           | Get all goals          |
 | PUT    | `/goals/{goal_id}` | Update a goal's status |
 | DELETE | `/goals/{goal_id}` | Delete a goal          |
+
+
 
 ## About
 
