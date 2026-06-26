@@ -2,3 +2,10 @@ app.db
 __pycache__/
 *.pyc
 .venv/
+challenge1.py
+challenge2.py
+session1.py
+session2.py
+session3.py
+notes.txt
+profile.txt
