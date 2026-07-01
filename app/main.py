@@ -24,7 +24,7 @@ def get_db():
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello, Prith"}
+    return {"message": "Welcome to the Goals API"}
 
 
 @app.post("/goals")
