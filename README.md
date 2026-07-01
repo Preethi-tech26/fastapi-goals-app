@@ -54,7 +54,9 @@ Visit `http://127.0.0.1:8000/docs` to explore the API.
 | PUT    | `/goals/{goal_id}` | Update a goal's status |
 | DELETE | `/goals/{goal_id}` | Delete a goal          |
 
-
+## Live Demo
+API is live at: https://fastapi-goals-app.onrender.com
+Interactive docs: https://fastapi-goals-app.onrender.com/docs
 
 ## About
 
