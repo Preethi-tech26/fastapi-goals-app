@@ -7,8 +7,9 @@
 
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
-from database import engine, SessionLocal, Base
-from models import Goal
+from app.database import engine, SessionLocal, Base
+from app.models import Goal
+from app.schemas import GoalCreate
 
 app = FastAPI()
 
@@ -27,7 +28,6 @@ def get_db():
 def read_root():
     return {"message": "Hello, Prith"}
 
-from schemas import GoalCreate
 
 @app.post("/goals")
 def create_goal(goal: GoalCreate, db: Session = Depends(get_db)):
