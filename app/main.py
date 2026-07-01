@@ -1,9 +1,7 @@
 
-# Session 5 - June 2026
-# Learned: SQLAlchemy, SQLite, database models, persistent storage via POST/GET
+# SQLAlchemy, SQLite, database models, persistent storage via POST/GET
 
-# Session 7 - June 2026
-# Learned: HTTPException, proper status codes, Pydantic validation schemas
+# HTTPException, proper status codes, Pydantic validation schemas
 
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
