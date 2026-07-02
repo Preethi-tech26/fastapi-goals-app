@@ -40,11 +40,14 @@ def get_goals(db: Session = Depends(get_db)):
     return db.query(Goal).all()
 
 @app.put("/goals/{goal_id}")
-def update_goal(goal_id: int, completed: int, db: Session = Depends(get_db)):
+def update_goal(goal_id: int, db: Session = Depends(get_db), completed: int = None, title: str = None):
     goal = db.query(Goal).filter(Goal.id == goal_id).first()
     if goal is None:
-        return {"error": "Goal not found"}
-    goal.completed = completed
+        raise HTTPException(status_code=404, detail="Goal not found")
+    if completed is not None:
+        goal.completed = completed
+    if title is not None:
+        goal.title = title
     db.commit()
     db.refresh(goal)
     return goal
