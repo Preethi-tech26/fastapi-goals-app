@@ -60,19 +60,19 @@ def read_root():
 
 @app.post("/goals")
 def create_goal(goal: GoalCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    new_goal = Goal(title=goal.title)
+    new_goal = Goal(title=goal.title, user_id=current_user.id)
     db.add(new_goal)
     db.commit()
     db.refresh(new_goal)
     return new_goal
 
 @app.get("/goals")
-def get_goals(db: Session = Depends(get_db)):
-    return db.query(Goal).all()
+def get_goals(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    return db.query(Goal).filter(Goal.user_id == current_user.id).all()
 
 @app.put("/goals/{goal_id}")
 def update_goal(goal_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user), completed: int = None, title: str = None):
-    goal = db.query(Goal).filter(Goal.id == goal_id).first()
+    goal = db.query(Goal).filter(Goal.id == goal_id, Goal.user_id == current_user.id).first()
     if goal is None:
         raise HTTPException(status_code=404, detail="Goal not found")
     if completed is not None:
@@ -87,10 +87,9 @@ from fastapi import FastAPI, Depends, HTTPException
 
 @app.delete("/goals/{goal_id}")
 def delete_goal(goal_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    goal = db.query(Goal).filter(Goal.id == goal_id).first()
+    goal = db.query(Goal).filter(Goal.id == goal_id, Goal.user_id == current_user.id).first()
     if goal is None:
         raise HTTPException(status_code=404, detail="Goal not found")
     db.delete(goal)
     db.commit()
     return {"message": f"Goal {goal_id} deleted"}
-

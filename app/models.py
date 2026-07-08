@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from app.database import Base
 
 class Goal(Base):
@@ -7,6 +7,7 @@ class Goal(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
     completed = Column(Integer, default=0)
+    user_id = Column(Integer,ForeignKey("users.id"))
     
 class User(Base):
     __tablename__ = "users"
