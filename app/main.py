@@ -17,7 +17,9 @@ from app.schemas import UserCreate, Token
 app = FastAPI()
 
 # Create the table when the app starts
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
+
 
 # Dependency to get a database session
 def get_db():
